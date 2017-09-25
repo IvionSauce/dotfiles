@@ -1,0 +1,14 @@
+profile=opengl-hq
+#vo=opengl-hq:interpolation:tscale=linear:cscale=ewa_lanczossharp:scale=ewa_lanczossharp
+
+scale=ewa_lanczossharp
+cscale=ewa_lanczossharp
+
+interpolation=yes
+tscale=linear
+video-sync=display-resample
+
+screenshot-template=~/Screenshots/shot%n
+screenshot-format=jpg
+
+ytdl=yes

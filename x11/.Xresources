@@ -1,0 +1,50 @@
+URxvt.scrollBar: false
+URxvt.saveLines: 5000
+URxvt.scrollTtyOutput: false
+
+URxvt.transparent: true
+URxvt.shading: 40
+URxvt.fading: 20
+
+! URxvt.font: *-*-fixed-medium-r-normal--*-110-*-*-*-*-iso8859-1
+URxvt.font: 7x14
+URxvt.boldFont: 7x14bold
+
+URxvt.intensityStyles: false
+
+! Some programs (most notably Emacs) do not follow, or only follow some
+! Fontconfig settings. Hence we got to reproduce them here in full to make sure
+! they stick.
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+*background: #171717
+*foreground: #F8F8F8
+
+! black
+*color0: #171717
+*color8: #37474f
+! red
+*color1: #E91E63
+*color9: #AD1457
+! green
+*color2: #97D01A
+*color10: #76B639
+! yellow
+*color3: #FFC107
+*color11: #FFA000
+! blue
+*color4: #16B1FB
+*color12: #289CD5
+! magenta
+*color5: #FF9800
+*color13: #FFA74D
+! cyan
+*color6: #0FDCB6
+*color14: #0A9B81
+! white
+*color7: #EBEBEB
+*color15: #F8F8F8

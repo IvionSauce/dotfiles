@@ -1,0 +1,12 @@
+partial modifier_keys
+xkb_symbols "swap_alt_ctl" {
+    replace key <LALT> { [ Control_L, Control_L ] };
+    replace key <LCTL> { [ Alt_L, Meta_L ] };
+    replace key <RALT> { [ Control_R, Control_R ] };
+    replace key <RCTL> { [ Alt_R, Meta_R ] };
+};
+
+partial modifier_keys
+xkb_symbols "superdel" {
+    replace key <DELE> { [ Super_R, Delete ] };
+};
