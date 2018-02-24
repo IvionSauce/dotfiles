@@ -6,13 +6,13 @@
 
 (add-to-list 'default-frame-alist '(font . "Go Mono-10"))
 ;; Only load theme when running a graphical client
-(defun themeing (&optional frame)
+(defun ivi-themeing (&optional frame)
   (if (display-graphic-p frame)
       (load-theme 'leuven-edit t)))
 ;; First hook makes sure standalone Emacs gets themed
 ;; Second hook makes sure Emacsclient gets themed
 ;; https://stackoverflow.com/questions/19054228/
-(add-hook 'window-setup-hook 'themeing)
-(add-hook 'after-make-frame-functions 'themeing)
+(add-hook 'window-setup-hook 'ivi-themeing)
+(add-hook 'after-make-frame-functions 'ivi-themeing)
 
 (provide 'appearance)
