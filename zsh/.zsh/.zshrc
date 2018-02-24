@@ -28,9 +28,9 @@ bindkey "^[q" push-line-or-edit
 # editing of arguments.
 bindkey "^A" move-to-arguments-or-beginning
 move-to-arguments-or-beginning() {
-    if [[ $WIDGET == $LASTWIDGET ]]; then 
+    if [[ $WIDGET == $LASTWIDGET ]]; then
 	# Repeated calls will switch between beginning and arguments location.
-	if [[ $CURSOR == 0 ]]; then 
+	if [[ $CURSOR == 0 ]]; then
 	    zle forward-word
 	else
 	    zle beginning-of-line
