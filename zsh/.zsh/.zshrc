@@ -17,8 +17,6 @@ eval `dircolors -b /etc/DIR_COLORS`
 # Moving easier around the filesystem and the directory stack.
 setopt autocd autopushd pushdignoredups pushdminus
 DIRSTACKSIZE=11
-# For when you need to move lots of stuff.
-autoload -Uz zmv
 
 
 ## Commandline editing ##
