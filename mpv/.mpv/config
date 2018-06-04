@@ -11,4 +11,5 @@ video-sync=display-resample
 screenshot-template=~/Screenshots/shot%n
 screenshot-format=jpg
 
+cache=yes
 ytdl=yes
