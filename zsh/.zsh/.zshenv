@@ -7,5 +7,5 @@ export LANG="en_US.UTF-8"
 #export __GL_SYNC_DISPLAY_DEVICE=DVI-D-0
 #export __VDPAU_NVIDIA_SYNC_DISPLAY_DEVICE=DVI-D-0
 
-ZDOTDIR=$HOME/.zsh
-fpath=("$ZDOTDIR/functions" $fpath)
+ZDOTDIR="$HOME/.zsh"
+fpath=("$ZDOTDIR/myfuncs" "$ZDOTDIR/prompt" $fpath)

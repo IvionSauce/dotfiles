@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+\ls -Ahlt --reverse --color=always --literal --hide-control-chars ${1:-.} \
+    | tail -n${2:-25} \
+    | tac

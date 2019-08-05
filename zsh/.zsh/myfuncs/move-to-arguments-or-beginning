@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+if [[ $WIDGET == $LASTWIDGET ]]; then
+    # Repeated calls will switch between beginning and arguments location.
+    if [[ $CURSOR == 0 ]]; then
+	zle forward-word
+    else
+	zle beginning-of-line
+    fi
+else
+    zle beginning-of-line
+    zle forward-word
+fi

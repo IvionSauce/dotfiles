@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+cd $(for ((c = 0; c < ${1:-1}; ++c)); do echo -n ../; done)

@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+reset
+stty sane
+tput rs1
+clear
+echo -e "\e[0m"
