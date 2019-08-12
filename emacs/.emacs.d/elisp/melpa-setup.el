@@ -23,6 +23,11 @@
 	     :config
 	     (smex-initialize))
 
+(use-package ibuffer-vc
+	     :config
+	     ;; Extends and configures ibuffer(-vc)
+	     (require 'gk-ibuffer))
+
 (use-package expand-region
 	     :bind
 	     ("C-=" . er/expand-region))
