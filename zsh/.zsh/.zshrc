@@ -28,7 +28,11 @@ alias ......=".. 5"
 
 # Git
 alias g="git"
-alias gg="git status"
+alias gg="git status --short"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias ga="git add"
+alias gc="git commit"
 alias yeet="git push origin"
 
 # Other
