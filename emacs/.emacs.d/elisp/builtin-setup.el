@@ -19,7 +19,4 @@
 ;; Overwrite selection if active
 (delete-selection-mode 1)
 
-;; Enable word wrap (and visual movement) for markdown-mode
-(add-hook 'markdown-mode-hook 'visual-line-mode)
-
 (provide 'builtin-setup)

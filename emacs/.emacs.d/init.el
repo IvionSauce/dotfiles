@@ -32,6 +32,5 @@
 (require 'custom-funcs)
 ;; Mapping or remapping keybindings
 (require 'keybindings-builtin)
-(require 'keybindings-melpa)
 ;; Themeing and font settings
 (require 'appearance)

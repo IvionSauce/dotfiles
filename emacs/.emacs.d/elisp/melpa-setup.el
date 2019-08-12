@@ -4,17 +4,31 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-;;; Packages installed using MELPA
-;;; Usually you don't have to load/require the libraries yourself
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+;; Install packages by default
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
 
-;; IDO ubiquitous
-(ido-ubiquitous-mode 1)
-(setq org-completion-use-ido t)		; Org mode got its own IDO handling
+(use-package ido-completing-read+
+	     :config
+	     (ido-ubiquitous-mode 1))
 
-;; SMEX
-(smex-initialize)
+(use-package smex
+	     :bind
+	     (("M-x" . smex)
+	      ("M-X" . smex-major-mode-commands))
+	     :config
+	     (smex-initialize))
 
-;; Work around for Haskell mode
-(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(use-package expand-region
+	     :bind
+	     ("C-=" . er/expand-region))
+
+(use-package markdown-mode
+	     :hook
+	     (markdown-mode . visual-line-mode))
 
 (provide 'melpa-setup)
