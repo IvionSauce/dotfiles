@@ -52,17 +52,22 @@
 
 (cl-defun gk-ibuffer-generate-filter-groups-by-dir ()
   "Create a set of ibuffer filter groups based on the dirs of buffers."
-  (let* ((func (lambda (buf)
-                 (when-let ((bufnam (buffer-file-name buf)))
-                   (if-let ((linknam (file-symlink-p bufnam)))
-                       (file-name-directory (expand-file-name linknam))
-                     (file-name-directory (expand-file-name bufnam))))))
-         (dirs (ibuffer-remove-duplicates (delq nil (mapcar func (buffer-list))))))
-    (mapcar (lambda (dir) (cons (concat "Directory: " dir) `((dir . ,dir)))) dirs)))
+  (let* ((func
+	  (lambda (buf)
+	    (when-let ((bufnam (buffer-file-name buf)))
+	      (if-let ((linknam (file-symlink-p bufnam)))
+		  (file-name-directory (expand-file-name linknam))
+		(file-name-directory (expand-file-name bufnam))))))
+         (dirs
+	  (ibuffer-remove-duplicates (delq nil (mapcar func (buffer-list))))))
+    (mapcar (lambda (dir)
+	      (cons (concat "Directory: " (abbreviate-file-name dir))
+		    `((dir . ,dir))))
+	    dirs)))
 
 (define-ibuffer-filter dir
     "Toggle current view to buffers with dir QUALIFIER."
-  (:description "directory" :reader (read-from-minibuffer "Filter by dir (regexp): "))
+  (:description "directory" :reader (read-from-minibuffer "Filter by dir: "))
   (ibuffer-awhen (buffer-file-name buf)
     (string= qualifier (file-name-directory it))))
 
