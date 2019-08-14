@@ -55,9 +55,7 @@
   (let* ((func
 	  (lambda (buf)
 	    (when-let ((bufnam (buffer-file-name buf)))
-	      (if-let ((linknam (file-symlink-p bufnam)))
-		  (file-name-directory (expand-file-name linknam))
-		(file-name-directory (expand-file-name bufnam))))))
+	      (file-name-directory (expand-file-name (file-truename bufnam))))))
          (dirs
 	  (ibuffer-remove-duplicates (delq nil (mapcar func (buffer-list))))))
     (mapcar (lambda (dir)
