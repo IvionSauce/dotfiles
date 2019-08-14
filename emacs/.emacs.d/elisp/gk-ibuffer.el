@@ -77,23 +77,29 @@ and special ones sepatarely."
          (gk-ibuffer-generate-filter-groups-by-dir))))
 
 ;; Hide these buffers by default.
-(defvar gk-ibuffer-collapsed-groups (list "Special buffers" "Emacs" "Documentation"
-                                          "VC"))
+(defvar gk-ibuffer-collapsed-groups
+  (list "Special buffers" "Emacs" "Documentation" "VC"))
 
-(define-advice ibuffer (:after (&rest args) gk-hidden-groups)
+;; Usage of functions and data structures glanced from 'ibuf-ext.el'.
+(defun gk-ibuffer-hide-hook ()
   "Hide groups in ‘gk-ibuffer-collapsed-groups’."
-  (ignore args)
-  (save-excursion
+  ;; Groups that are visible: not hidden and not empty.
+  (let ((vis-groups
+	(ibuffer-generate-filter-groups (ibuffer-current-state-list) t t)))
     (dolist (group gk-ibuffer-collapsed-groups)
-      (ignore-errors
-        (ibuffer-jump-to-filter-group group)
-        (ibuffer-toggle-filter-group)))))
+      ;; Hide filter group if it is visible.
+      (when (assoc group vis-groups)
+	;; If we pushed without checking visibility we would make empty groups
+	;; appear in *Ibuffer*, which disappear when you try to expand them.
+	(push group ibuffer-hidden-filter-groups))))
+  (ibuffer-update nil t))
 
 (cl-defun gk-ibuffer-hook ()
   (unless (eq ibuffer-sorting-mode 'alphabetic)
     (ibuffer-do-sort-by-filename/process))
   (ibuffer-update nil t))
 
+(add-hook 'ibuffer-hook 'gk-ibuffer-hide-hook)
 (add-hook 'ibuffer-hook 'gk-ibuffer-hook)
 
 (provide 'gk-ibuffer)
