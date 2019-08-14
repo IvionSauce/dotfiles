@@ -95,15 +95,10 @@ and special ones sepatarely."
 	;; If we pushed without checking visibility we would make empty groups
 	;; appear in *Ibuffer*, which disappear when you try to expand them.
 	(push group ibuffer-hidden-filter-groups))))
-  (ibuffer-update nil t))
+  (ibuffer-redisplay t))
 
-(cl-defun gk-ibuffer-hook ()
-  (unless (eq ibuffer-sorting-mode 'alphabetic)
-    (ibuffer-do-sort-by-filename/process))
-  (ibuffer-update nil t))
-
+(setq ibuffer-default-sorting-mode 'filename/process)
 (add-hook 'ibuffer-hook 'gk-ibuffer-hide-hook)
-(add-hook 'ibuffer-hook 'gk-ibuffer-hook)
 
 (provide 'gk-ibuffer)
 ;;; gk-ibuffer.el ends here
