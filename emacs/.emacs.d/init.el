@@ -20,6 +20,16 @@
  ;; No GNU Emacs welcome buffer
  inhibit-startup-message t)
 
+;; Small helper functions to easily set keybindings
+;; Typing global-set-key and kbd all the time gets old (even with completion)
+(defun ivi-keys (binds-alist &optional keymap)
+  (let ((map (or keymap global-map)))
+    (dolist (cell binds-alist)
+      (define-key map (kbd (car cell)) (cdr cell)))))
+
+(defun ivi-keys-with-map (keymap binds-alist)
+  (ivi-keys binds-alist keymap))
+
 ;; My library path
 (add-to-list 'load-path (locate-user-emacs-file "elisp"))
 ;; Autosave and backup settings
