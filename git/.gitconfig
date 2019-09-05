@@ -1,0 +1,18 @@
+[user]
+	name = Ivion
+	email = ivion@xs4all.nl
+[core]
+	pager = less --quit-if-one-screen
+[alias]
+	ls = log --stat
+	lp = log --patch
+	lg = log --graph --oneline
+	lgv = log --graph --stat
+	flog = log --patch --full-diff
+	unstage = reset HEAD --
+	ree = rebase --interactive
+	cont = rebase --continue
+	abort = rebase --abort
+	# From https://gitlab.com/gamma-neodots/neodots.cli/blob/master/CONFIG/git/config
+	ll = log --pretty=tformat:'%C(yellow)%h %C(blue)<%an>%Creset %Cred%ad%Creset%d%Creset %s' --graph --date=short
+	lt = log --pretty=tformat:'%C(yellow)%h %C(blue)<%an>%Creset%d%Creset %s %Cgreen(%cr)' --graph
