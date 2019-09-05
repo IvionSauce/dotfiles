@@ -18,5 +18,10 @@
 (electric-pair-mode 1)
 ;; Overwrite selection if active
 (delete-selection-mode 1)
+;; Automatically revert buffer if file has changed, but only if your buffer is
+;; not modified
+(global-auto-revert-mode 1)
+;; Cleanup whitespace "errors" when saving
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (provide 'builtin-setup)
