@@ -14,20 +14,20 @@
   (:name "Size" :inline t)
   (let ((bs (buffer-size)))
     (cond ((> bs 1e6) (format "%7.1fmB" (/ bs 1e6)))
-          ((> bs 1e3) (format "%7.1fkB" (/ bs 1e3)))
-          (t          (format "%7d  " bs)))))
+	  ((> bs 1e3) (format "%7.1fkB" (/ bs 1e3)))
+	  (t          (format "%7d  " bs)))))
 
 (setf ibuffer-formats
       '((mark modified read-only vc-status-mini " "
-              (name 18 18 :left :elide)
-              " "
-              (size-h 9 -1 :right)
-              " "
-              (mode 16 16 :left :elide)
-              " "
-              (vc-status 16 16 :left)
-              " "
-              filename-and-process))
+	      (name 18 18 :left :elide)
+	      " "
+	      (size-h 9 -1 :right)
+	      " "
+	      (mode 16 16 :left :elide)
+	      " "
+	      (vc-status 16 16 :left)
+	      " "
+	      filename-and-process))
       ibuffer-show-empty-filter-groups nil)
 
 (define-ibuffer-filter name-not
@@ -56,7 +56,7 @@
 	  (lambda (buf)
 	    (when-let ((bufnam (buffer-file-name buf)))
 	      (file-name-directory (expand-file-name (file-truename bufnam))))))
-         (dirs
+	 (dirs
 	  (ibuffer-remove-duplicates (delq nil (mapcar func (buffer-list))))))
     (mapcar (lambda (dir)
 	      (cons (concat "Directory: " (abbreviate-file-name dir))
@@ -74,10 +74,10 @@
 and special ones sepatarely."
   (ignore args)
   (setf ibuffer-filter-groups
-        (append
-         gk-ibuffer-filters
-         (ibuffer-vc-generate-filter-groups-by-vc-root)
-         (gk-ibuffer-generate-filter-groups-by-dir))))
+	(append
+	 gk-ibuffer-filters
+	 (ibuffer-vc-generate-filter-groups-by-vc-root)
+	 (gk-ibuffer-generate-filter-groups-by-dir))))
 
 ;; Hide these buffers by default.
 (defvar gk-ibuffer-collapsed-groups
