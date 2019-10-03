@@ -23,9 +23,11 @@
 ;; Helper functions to easily set keybindings
 ;; Typing global-set-key and kbd all the time gets old (even with completion)
 (defun ivi-keys (binds-alist &optional keymap)
+  "Perform keybindings listed in BINDS-ALIST. BINDS-ALIST has the form of
+((KEY . DEF)) where KEY is either a single character or a string describing the
+keys – as suitable for `kbd'. When KEYMAP is omitted `global-map' is assumed."
   (let ((map (or keymap global-map)))
     (dolist (cell binds-alist)
-      ;; Has the form of (KEY . DEF)
       (let ((key (car cell)) (def (cdr cell)))
 	;; Handle single character keybinds
 	(if (characterp key)
