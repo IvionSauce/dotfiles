@@ -35,6 +35,20 @@
 (defun ivi-keys-with-map (keymap binds-alist)
   (ivi-keys binds-alist keymap))
 
+(defun ivi-keys-local (mode-hooks binds-alist)
+  "Create function that performs keybindings (local to mode) listed in
+BINDS-ALIST and add it to the MODE-HOOKS. MODE-HOOKS can either be a list of
+hooks or a single hook. BINDS-ALIST has the form of ((KEY . DEF)) where KEY
+is either a single character or a string describing the keys – as suitable
+for `kbd'."
+  (let ((hooks (if (listp mode-hooks) mode-hooks (list mode-hooks)))
+	(bind-keys (lambda ()
+		     (let ((map (current-local-map)))
+		       (if map (ivi-keys binds-alist map)
+			 (error "No local keymap found"))))))
+    (dolist (mode-hook hooks)
+      (add-hook mode-hook bind-keys))))
+
 ;; My library path
 (add-to-list 'load-path (locate-user-emacs-file "elisp"))
 ;; Autosave and backup settings
