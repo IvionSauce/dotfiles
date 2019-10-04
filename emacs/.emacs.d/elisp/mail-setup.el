@@ -14,7 +14,23 @@
 	;; Don't ask if we really want to quit
 	mu4e-confirm-quit nil)
 
-  ;; There are a few important variables missing, but I have plans...
+  (defvar ivi-secrets-alist nil
+    "Association list of secrets.")
+
+  (let ((mail-addresses
+	 '("ivion@xs4all.nl")))
+    (setq ivi-secrets-alist
+	  `((full-name . nil)
+	    (email-address . ,(first mail-addresses))
+	    (email-address-list . ,mail-addresses))))
+
+  (defmacro ivi-reveal (elem)
+    "Reveal secret associated with ELEM in `ivi-secrets-alist'."
+    `(cdr (assq ',elem ivi-secrets-alist)))
+
+  (setq user-mail-address (ivi-reveal email-address)
+	user-full-name (ivi-reveal full-name)
+	mu4e-user-mail-address-list (ivi-reveal email-address-list))
 
   (setq mu4e-maildir-shortcuts
 	'(("/INBOX" . ?i)
