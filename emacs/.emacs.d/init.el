@@ -28,8 +28,10 @@
 (require 'autosave-backup)
 ;; Setting up built-in packages
 (require 'builtin-setup)
-;; Setting up MELPA packages
+;; Setting up MELPA packages (and their keybindings)
 (require 'melpa-setup)
+;; Setting up email (mu4e)
+(require 'mail-setup)
 ;; Custom functions/advices
 (require 'custom-funcs)
 ;; Mapping or remapping keybindings
