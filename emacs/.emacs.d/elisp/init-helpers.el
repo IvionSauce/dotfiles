@@ -1,3 +1,10 @@
+;; Helper macro for getting secrets. Put it here instead of in ivi-secrets.el
+;; because there's nothing secret about the macro.
+(when (require 'ivi-secrets nil t)
+  (defmacro ivi-reveal (elem)
+    "Reveal secret associated with ELEM in `ivi-secrets-alist'."
+    `(cdr (assq ',elem ivi-secrets-alist))))
+
 ;; Helper functions to easily set keybindings
 ;; Typing global-set-key and kbd all the time gets old (even with completion)
 (defun ivi-keys (binds-alist &optional keymap)

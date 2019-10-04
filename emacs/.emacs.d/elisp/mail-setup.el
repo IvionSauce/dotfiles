@@ -14,23 +14,13 @@
 	;; Don't ask if we really want to quit
 	mu4e-confirm-quit nil)
 
-  (defvar ivi-secrets-alist nil
-    "Association list of secrets.")
-
-  (let ((mail-addresses
-	 '("ivion@xs4all.nl")))
-    (setq ivi-secrets-alist
-	  `((full-name . nil)
-	    (email-address . ,(first mail-addresses))
-	    (email-address-list . ,mail-addresses))))
-
-  (defmacro ivi-reveal (elem)
-    "Reveal secret associated with ELEM in `ivi-secrets-alist'."
-    `(cdr (assq ',elem ivi-secrets-alist)))
-
-  (setq user-mail-address (ivi-reveal email-address)
-	user-full-name (ivi-reveal full-name)
-	mu4e-user-mail-address-list (ivi-reveal email-address-list))
+    ;; Personal/identity information, warn if we don't have it
+  (if (require 'ivi-secrets nil t)
+      (setq user-mail-address (ivi-reveal email-address)
+	    user-full-name (ivi-reveal full-name)
+	    mu4e-user-mail-address-list (ivi-reveal email-address-list))
+    (display-warning 'emacs-init
+		     "Personal information missing from mail-setup.el"))
 
   (setq mu4e-maildir-shortcuts
 	'(("/INBOX" . ?i)
