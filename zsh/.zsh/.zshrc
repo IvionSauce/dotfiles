@@ -61,6 +61,8 @@ eval "$(dircolors -b /etc/DIR_COLORS)"
 # Moving easier around the filesystem and the directory stack.
 setopt autocd autopushd pushdignoredups pushdminus
 DIRSTACKSIZE=11
+# I dislike the US date and time format.
+export LC_TIME="POSIX"
 
 
 ## Commandline editing ##
