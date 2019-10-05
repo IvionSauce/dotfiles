@@ -11,6 +11,9 @@
 	mu4e-get-mail-command "mbsync --all"
 	;; Make mu4e play nicely with mbsync
 	mu4e-change-filenames-when-moving t
+	;; Some display changes
+	mu4e-headers-date-format "%d/%m/%y"
+	mu4e-view-show-addresses t
 	;; Don't ask if we really want to quit
 	mu4e-confirm-quit nil)
 
@@ -40,7 +43,7 @@
   ;; This is compounded by different server software having different attitudes
   ;; and configuration options, making it difficult to predict whether or not the
   ;; message will get deleted/expunged. Hence we'll go the safer route, never
-  ;; marking messages +T.
+  ;; marking trashed messages +T.
   (setf (alist-get 'trash mu4e-marks)
 	'(:char ("d" . "▼")
 	  :prompt "dtrash"
