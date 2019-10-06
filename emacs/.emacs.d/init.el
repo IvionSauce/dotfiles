@@ -20,6 +20,10 @@
  ;; No GNU Emacs welcome buffer
  inhibit-startup-message t)
 
+;; Optionally use commit-patch, https://porkrind.org/commit-patch/
+;; Maybe not useful for those that exclusively use Magit
+(require 'commit-patch-buffer nil t)
+
 ;; My library path
 (add-to-list 'load-path (locate-user-emacs-file "elisp"))
 ;; Helper functions and macros
