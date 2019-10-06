@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Helper macro for getting secrets. Put it here instead of in ivi-secrets.el
 ;; because there's nothing secret about the macro.
 (when (require 'ivi-secrets nil t)
@@ -22,18 +24,15 @@ keys – as suitable for `kbd'. When KEYMAP is omitted `global-map' is assumed."
 (defun ivi-keys-with-map (keymap binds-alist)
   (ivi-keys binds-alist keymap))
 
-(defun ivi-keys-local (mode-hooks binds-alist)
-  "Create function that performs keybindings (local to mode) listed in
-BINDS-ALIST and add it to the MODE-HOOKS. MODE-HOOKS can either be a list of
-hooks or a single hook. BINDS-ALIST has the form of ((KEY . DEF)) where KEY
-is either a single character or a string describing the keys – as suitable
-for `kbd'."
-  (let ((hooks (if (listp mode-hooks) mode-hooks (list mode-hooks)))
-	(bind-keys (lambda ()
-		     (let ((map (current-local-map)))
-		       (if map (ivi-keys binds-alist map)
-			 (error "No local keymap found"))))))
-    (dolist (mode-hook hooks)
-      (add-hook mode-hook bind-keys))))
+(defun ivi-keys-local (mode binds-alist)
+  "Perform keybindings, local to MODE, listed in BINDS-ALIST. The keymap the
+bindings are defined in is derived from the symbol name of MODE. The binding of
+the keys is deferred until MODE is loaded. See `ivi-keys' for a description of
+BINDS-ALIST."
+  (with-eval-after-load mode
+    (let ((local-map (intern-soft (concat (symbol-name mode) "-mode-map"))))
+      (if local-map
+	  (ivi-keys binds-alist (symbol-value local-map))
+	(error "No local keymap found for %s (tried: %s)" mode local-map)))))
 
 (provide 'init-helpers)
