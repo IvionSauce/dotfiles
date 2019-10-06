@@ -18,7 +18,7 @@
 	mu4e-confirm-quit nil)
 
     ;; Personal/identity information, warn if we don't have it
-  (if (require 'ivi-secrets nil t)
+  (if (fboundp 'ivi-reveal)
       (setq user-mail-address (ivi-reveal email-address)
 	    user-full-name (ivi-reveal full-name)
 	    mu4e-user-mail-address-list (ivi-reveal email-address-list))
