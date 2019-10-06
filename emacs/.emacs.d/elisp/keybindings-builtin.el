@@ -2,6 +2,8 @@
 (autoload 'zap-up-to-char "misc"
   "Kill up to, but not including ARGth occurrence of CHAR." t)
 
+;; I mostly use the GUI client, so I don't exclude bindings that won't work in
+;; the terminal (although if it works in both it's a plus).
 (ivi-keys
  '(
    ;; Rebind buttons to similar, but better, alternatives
@@ -29,7 +31,6 @@
 
 
    ;;; Bind some difficult to reach and/or complex keybinds to easier variants
-   ;;; Many of these only work in the GUI version
 
    ;; C-x 1
    ("C-1" . delete-other-windows)
@@ -51,6 +52,11 @@
    ;; C-x C-s C-x C-c • Save-and-exit for quick jobs
    ("M-g RET" . (lambda () (interactive)
 		  (save-buffer) (save-buffers-kill-terminal)))
+
+   ;; C-x v =
+   ("M-g r" . vc-diff)
+   ;; C-x v D
+   ("M-g M-r" . vc-root-diff)
 
    ;; C-x o
    ("s-o" . other-window)
@@ -79,5 +85,10 @@
    ;; M-S-. / M->
    ("C->" . end-of-buffer)
    ))
+
+(ivi-keys-local
+ 'log-view
+ '((?. . log-view-msg-next)
+   (?, . log-view-msg-prev)))
 
 (provide 'keybindings-builtin)
