@@ -32,6 +32,18 @@
 	  ("/Drafts" . ?d)
 	  ("/Spam" . ?k)))
 
+  ;; Custom keybinds
+  (ivi-keys-with-map
+   mu4e-headers-mode-map
+   '((?. . mu4e-headers-next)
+     (?, . mu4e-headers-prev)))
+
+  (ivi-keys-with-map
+   mu4e-view-mode-map
+   '((?. . mu4e-view-headers-next)
+     (?, . mu4e-view-headers-prev)
+     (?` . mu4e-view-raw-message)))
+
   (setq mu4e-headers-fields
 	'((:human-date . 12)
 	  (:flags . 6)
