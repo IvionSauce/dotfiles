@@ -22,6 +22,7 @@ keys – as suitable for `kbd'. When KEYMAP is omitted `global-map' is assumed."
 	  (define-key map (kbd key) def))))))
 
 (defun ivi-keys-with-map (keymap binds-alist)
+  "Same as `ivi-keys', but with the KEYMAP argument first."
   (ivi-keys binds-alist keymap))
 
 (defun ivi-keys-local (mode binds-alist)
