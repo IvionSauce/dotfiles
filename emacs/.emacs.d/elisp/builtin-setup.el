@@ -23,5 +23,9 @@
 (global-auto-revert-mode 1)
 ;; Cleanup whitespace "errors" when saving
 (add-hook 'before-save-hook 'whitespace-cleanup)
+;; Preferences for editing commit messages
+(ivi-mode-setup 'log-edit (lambda ()
+			    (setq fill-column 72)
+			    (auto-fill-mode 1)))
 
 (provide 'builtin-setup)
