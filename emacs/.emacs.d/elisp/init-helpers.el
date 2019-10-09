@@ -10,10 +10,10 @@
 ;; Helper functions to easily set keybindings
 ;; Typing global-set-key and kbd all the time gets old (even with completion)
 (defun ivi-keys (binds-alist &optional keymap)
-  "Perform keybindings listed in BINDS-ALIST. BINDS-ALIST has the
-form of ((KEY . DEF)) where KEY is either a single character or a
-string describing the keys - as suitable for `kbd'. When KEYMAP
-is omitted `global-map' is assumed."
+  "Define keybindings in BINDS-ALIST in KEYMAP.
+BINDS-ALIST has the form of ((KEY . DEF)) where KEY is either a
+single character or a string describing the keys - as suitable
+for `kbd'. When KEYMAP is omitted `global-map' is assumed."
   (let ((map (or keymap global-map)))
     (dolist (cell binds-alist)
       (let ((key (car cell)) (def (cdr cell)))
@@ -26,18 +26,19 @@ is omitted `global-map' is assumed."
   "Same as `ivi-keys', but with the KEYMAP argument first."
   (ivi-keys binds-alist keymap))
 
-(defun ivi-keys-local (mode binds-alist)
-  "Perform keybindings, local to MODE, listed in BINDS-ALIST. The
-keymap the bindings are defined in is derived from the symbol
-name of MODE. The binding of the keys is deferred until MODE is
-loaded. See `ivi-keys' for a description of BINDS-ALIST."
-  (with-eval-after-load mode
-    (let* ((local-map-string (ivi-derive-from-symbol mode 'keymap))
+(defun ivi-keys-local (feature-symbol binds-alist)
+  "When FEATURE-SYMBOL gets loaded do keybindings in BINDS-ALIST.
+We derive a keymap symbol name from FEATURE-SYMBOL and use the
+keymap that symbol holds to define keys in. Hence the keys are
+defined local to the mode associated with that feature.
+See `ivi-keys' for a description of BINDS-ALIST."
+  (with-eval-after-load feature-symbol
+    (let* ((local-map-string (ivi-derive-from-symbol feature-symbol 'keymap))
 	   (local-map (intern-soft local-map-string)))
       (if local-map
 	  (ivi-keys binds-alist (symbol-value local-map))
 	(error "No local keymap found for %s (tried: %s)"
-	       mode local-map-string)))))
+	       feature-symbol local-map-string)))))
 
 (defun ivi-mode-setup (feature-symbol setup-func)
   "When FEATURE-SYMBOL gets loaded add SETUP-FUNC to its mode-hook.
