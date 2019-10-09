@@ -39,6 +39,18 @@ loaded. See `ivi-keys' for a description of BINDS-ALIST."
 	(error "No local keymap found for %s (tried: %s)"
 	       mode local-map-string)))))
 
+(defun ivi-mode-setup (feature-symbol setup-func)
+  "When FEATURE-SYMBOL gets loaded add SETUP-FUNC to its mode-hook.
+We derive a mode-hook symbol name from FEATURE-SYMBOL and use
+that symbol name to add SETUP-FUNC to the mode hooks."
+  (with-eval-after-load feature-symbol
+    (let* ((hook-string (ivi-derive-from-symbol feature-symbol 'hook))
+	   (hook (intern-soft hook-string)))
+      (if hook
+	  (add-hook hook setup-func)
+	(error "No hook found for %s (tried: %s)"
+	       feature-symbol hook-string)))))
+
 (defun ivi-derive-from-symbol (symbol derive-type)
   "Derives from SYMBOL a new name, according to DERIVE-TYPE.
 The new symbol name is returned as a string, so the caller still
