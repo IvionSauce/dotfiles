@@ -31,9 +31,32 @@ bindings are defined in is derived from the symbol name of MODE. The binding of
 the keys is deferred until MODE is loaded. See `ivi-keys' for a description of
 BINDS-ALIST."
   (with-eval-after-load mode
-    (let ((local-map (intern-soft (concat (symbol-name mode) "-mode-map"))))
+    (let* ((local-map-string (ivi-derive-from-symbol mode 'keymap))
+	   (local-map (intern-soft local-map-string)))
       (if local-map
 	  (ivi-keys binds-alist (symbol-value local-map))
-	(error "No local keymap found for %s (tried: %s)" mode local-map)))))
+	(error "No local keymap found for %s (tried: %s)"
+	       mode local-map-string)))))
+
+(defun ivi-derive-from-symbol (symbol derive-type)
+  "Derives from SYMBOL a new name, according to DERIVE-TYPE.
+The new symbol name is returned as a string, so the caller still
+has to `intern' or `intern-soft' the name as desired.\n
+DERIVE-TYPE must be one of the following symbols:
+• keymap / mode-map\tReturn symbol name to define keys in.
+• hook / mode-hook\tReturn symbol name to add hooks to."
+  (let* ((symbol-string (symbol-name symbol))
+	 ;; Add either suffix unmodified, or prepended with -mode
+	 (concat-cond
+	  (lambda (suffix)
+	    (concat symbol-string
+		    (if (string-suffix-p "-mode" symbol-string)
+			suffix (concat "-mode" suffix))))))
+    (cond
+     ((or (eq derive-type 'keymap)
+	  (eq derive-type 'mode-map)) (funcall concat-cond "-map"))
+     ((or (eq derive-type 'hook)
+	  (eq derive-type 'mode-hook)) (funcall concat-cond "-hook"))
+     (t (error "Invalid derive-type argument")))))
 
 (provide 'init-helpers)
