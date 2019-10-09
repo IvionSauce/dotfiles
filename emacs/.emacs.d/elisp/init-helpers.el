@@ -10,9 +10,10 @@
 ;; Helper functions to easily set keybindings
 ;; Typing global-set-key and kbd all the time gets old (even with completion)
 (defun ivi-keys (binds-alist &optional keymap)
-  "Perform keybindings listed in BINDS-ALIST. BINDS-ALIST has the form of
-((KEY . DEF)) where KEY is either a single character or a string describing the
-keys – as suitable for `kbd'. When KEYMAP is omitted `global-map' is assumed."
+  "Perform keybindings listed in BINDS-ALIST. BINDS-ALIST has the
+form of ((KEY . DEF)) where KEY is either a single character or a
+string describing the keys - as suitable for `kbd'. When KEYMAP
+is omitted `global-map' is assumed."
   (let ((map (or keymap global-map)))
     (dolist (cell binds-alist)
       (let ((key (car cell)) (def (cdr cell)))
@@ -26,10 +27,10 @@ keys – as suitable for `kbd'. When KEYMAP is omitted `global-map' is assumed."
   (ivi-keys binds-alist keymap))
 
 (defun ivi-keys-local (mode binds-alist)
-  "Perform keybindings, local to MODE, listed in BINDS-ALIST. The keymap the
-bindings are defined in is derived from the symbol name of MODE. The binding of
-the keys is deferred until MODE is loaded. See `ivi-keys' for a description of
-BINDS-ALIST."
+  "Perform keybindings, local to MODE, listed in BINDS-ALIST. The
+keymap the bindings are defined in is derived from the symbol
+name of MODE. The binding of the keys is deferred until MODE is
+loaded. See `ivi-keys' for a description of BINDS-ALIST."
   (with-eval-after-load mode
     (let* ((local-map-string (ivi-derive-from-symbol mode 'keymap))
 	   (local-map (intern-soft local-map-string)))
