@@ -32,12 +32,30 @@ backwards. Else kill active region."
       (kill-region (region-beginning) (region-end))
     (kill-word -1)))
 
+(defun isearch-exit-at-front ()
+  "Always exit isearch at the front of search match."
+  (interactive)
+  (isearch-exit)
+  (when isearch-forward
+    (goto-char isearch-other-end)))
+
+(defun isearch-exit-at-end ()
+  "Always exit isearch at the end of search match."
+  (interactive)
+  (isearch-exit)
+  (when (not isearch-forward)
+    (goto-char isearch-other-end)))
 
 ;; Keybindings
 
-(global-set-key (kbd "C-a") 'prelude-move-beginning-of-line)
-(global-set-key (kbd "C-w") 'ivi-kill-region-or-word)
+(ivi-keys
+ '(("C-a" . prelude-move-beginning-of-line)
+   ("C-w" . ivi-kill-region-or-word)))
 
+(ivi-keys-with-map
+ isearch-mode-map
+ '(("<return>" . isearch-exit-at-front)
+   ("C-<return>" . isearch-exit-at-end)))
 
 ;;; Advices
 
