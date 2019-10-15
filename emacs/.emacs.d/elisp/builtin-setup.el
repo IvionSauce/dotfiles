@@ -1,8 +1,3 @@
-;; Enable IDO mode
-(ido-mode 1)
-(ido-everywhere 1)
-(setq ido-enable-flex-matching t)
-
 ;; Enable Recentf mode
 (recentf-mode 1)
 (setq recentf-max-menu-items 42
