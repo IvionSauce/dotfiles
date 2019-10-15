@@ -32,13 +32,13 @@
 (require 'autosave-backup)
 ;; Setting up built-in packages
 (require 'builtin-setup)
+;; Mapping or remapping keybindings
+(require 'keybindings-builtin)
 ;; Setting up MELPA packages (and their keybindings)
 (require 'melpa-setup)
 ;; Setting up email (mu4e)
 (require 'mail-setup)
 ;; Custom functions/advices
 (require 'custom-funcs)
-;; Mapping or remapping keybindings
-(require 'keybindings-builtin)
 ;; Themeing and font settings
 (require 'appearance)
