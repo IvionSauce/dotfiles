@@ -1,7 +1,7 @@
 ;; MELPA
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+	     '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 ;; Bootstrap use-package
@@ -57,11 +57,28 @@
   ("C-=" . er/expand-region))
 
 (use-package avy
+  :config
+  (setq avy-style 'post
+	avy-styles-alist '((avy-goto-line . at-full)))
+  ;; Reduce visual clutter by setting avy-background and simplifying the colour
+  ;; coding for matches
+  (set-face-attribute 'avy-lead-face nil :background nil :foreground "red")
+  (set-face-attribute 'avy-lead-face-0 nil :background nil :foreground "red")
+  (setq avy-background t
+	avy-lead-faces '(avy-lead-face avy-lead-face avy-lead-face))
   :bind
-  (("M-g M-g" . avy-goto-word-1)
+  (("M-g M-g" . avy-goto-char-2)
    ("M-g g" . avy-goto-line)
    ("M-g SPC" . avy-goto-char-timer)
    ("M-g M-SPC" . avy-goto-char-timer)))
+
+;; Set up avy-jump in Helm
+(use-package ace-jump-helm-line
+  :config
+  (setq ace-jump-helm-line-default-action 'select)
+  :bind
+  (:map helm-map
+	("C-'" . ace-jump-helm-line)))
 
 (use-package markdown-mode
   :hook
