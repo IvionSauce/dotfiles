@@ -22,7 +22,12 @@
 
 ;; Optionally use commit-patch, https://porkrind.org/commit-patch/
 ;; Maybe not useful for those that exclusively use Magit
-(require 'commit-patch-buffer nil t)
+(when (require 'commit-patch-buffer nil t)
+  ;; Hack to cleanup commit-patch buffers after commit
+  (advice-add 'log-edit-done :after
+	      (lambda ()
+		(ignore-errors (kill-buffer "*commit*")
+			       (kill-buffer "*amend*")))))
 
 ;; My library path
 (add-to-list 'load-path (locate-user-emacs-file "elisp"))
