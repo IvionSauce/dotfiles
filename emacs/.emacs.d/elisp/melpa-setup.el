@@ -4,6 +4,9 @@
 	     '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+;; Workaround for race condition with GnuTLS
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
