@@ -21,6 +21,7 @@
   (require 'helm-config)
   (setq helm-buffers-fuzzy-matching t
 	helm-recentf-fuzzy-match t
+	helm-M-x-fuzzy-match t
 	helm-file-cache-fuzzy-match t
 	helm-completion-in-region-fuzzy-match t)
   ;; Put completion window below and autoresize
@@ -41,7 +42,18 @@
    ("M-[" . (lambda () (interactive)
 	      (other-window 1) (helm-mini)))
    ("M-g M-f" . helm-find-files)
-   ("C-c h" . helm-command-prefix)))
+   ("C-c h" . helm-command-prefix)
+   :map helm-map
+   ("C-," . helm-previous-line)
+   ("C-." . helm-next-line)
+   :map helm-buffer-map
+   ("C-c C-x" . helm-buffer-run-kill-buffers)))
+
+(use-package helm-swoop
+  :config
+  (setq helm-swoop-speed-or-color t)
+  :bind
+  (("M-s s" . helm-swoop)))
 
 (use-package magit
   :config
