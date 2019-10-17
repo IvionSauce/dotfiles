@@ -60,7 +60,10 @@
   (add-hook 'git-commit-mode-hook (lambda ()
 				    (setq fill-column 72)))
   :bind
-  (("M-g m" . magit-status)))
+  (("M-g m" . magit-status)
+   :map magit-mode-map
+   ("," . magit-section-backward)
+   ("." . magit-section-forward)))
 
 (use-package ibuffer-vc
   :config

@@ -75,7 +75,7 @@
    ;; C-M-S-5 / C-M-%
    ("M-5" . query-replace-regexp)
    ;; M-S-6 / M-^
-   ("C-6" . delete-indentation)
+   ("C-0" . delete-indentation)
    ;; M-S-[ / M-{
    ("C-," . backward-paragraph)
    ;; M-S-] / M-}
@@ -84,11 +84,25 @@
    ("C-<" . beginning-of-buffer)
    ;; M-S-. / M->
    ("C->" . end-of-buffer)
+
+   ;; These commands sometimes see use, but not enough to warrant a prime
+   ;; location. Also go for the dwim variant.
+   ("M-c" . nil)
+   ("M-c c" . capitalize-dwim)
+   ("M-c l" . downcase-dwim)
+   ("M-c u" . upcase-dwim)
    ))
 
 (ivi-keys-local
  'log-view
  '((?. . log-view-msg-next)
    (?, . log-view-msg-prev)))
+
+(ivi-keys-local
+ 'ibuffer
+ '((?. . ibuffer-forward-line)
+   (?, . ibuffer-backward-line)
+   ;; Previously ibuffer-switch-format
+   (?` . ibuffer-toggle-sorting-mode)))
 
 (provide 'keybindings-builtin)
