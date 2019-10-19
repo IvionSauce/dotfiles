@@ -65,6 +65,15 @@
    ("," . magit-section-backward)
    ("." . magit-section-forward)))
 
+(use-package crux
+  :bind
+  (("C-a" . crux-move-beginning-of-line)
+   ("C-k" . crux-smart-kill-line)
+   ("C-<return>" . crux-smart-open-line)
+   ("C-o" . crux-smart-open-line-above)
+   ("C-M-z" . crux-indent-defun)
+   ("M-0" . crux-top-join-line)))
+
 (use-package ibuffer-vc
   :config
   ;; Extends and configures ibuffer(-vc)
