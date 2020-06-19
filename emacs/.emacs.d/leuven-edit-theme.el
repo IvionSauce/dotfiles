@@ -76,6 +76,7 @@ CONTROL can be a number, nil, or t.  When t, use DEFAULT-HEIGHT."
 
 ;; Changes made from upstream:
 ;; Backgrounds for default, org-default and fringe
+;; Revert to previous colours for cursor, region and paren-matched
 
 (deftheme leuven-edit
   "Face colors with a light background.
@@ -133,9 +134,9 @@ more...")
       (ol6 '(:height 1.0 :weight bold :slant italic :foreground "#0077CC"))
       (ol7 '(:height 1.0 :weight bold :slant italic :foreground "#2EAE2C"))
       (ol8 '(:height 1.0 :weight bold :slant italic :foreground "#FD8008"))
-      (paren-matched '(:background "#C0E8C3")) ; Or take that green for region?
+      (paren-matched '(:background "#99CCFF"))
       (paren-unmatched '(:weight bold :underline "red" :foreground "black" :background "#FFA5A5"))
-      (region '(:background "#8ED3FF"))
+      (region '(:background "#ABDFFA"))
       (shadow '(:foreground "#7F7F7F"))
       (string '(:foreground "#008000")) ; or #D0372D
       (subject '(:family "Sans Serif" :weight bold :foreground "black"))
@@ -157,7 +158,7 @@ more...")
    `(bold-italic ((,class (:weight bold :slant italic :foreground "black"))))
    `(italic ((,class (:slant italic :foreground "#1A1A1A"))))
    `(underline ((,class (:underline t))))
-   `(cursor ((,class (:background "#21BDFF"))))
+   `(cursor ((,class (:background "#0FB300"))))
 
    ;; Lucid toolkit emacs menus.
    `(menu ((,class (:foreground "#FFFFFF" :background "#333333"))))
