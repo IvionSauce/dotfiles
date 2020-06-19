@@ -50,14 +50,18 @@
      (mode . eww-mode)))
   "Fixed filter definitions for ibuffer.")
 
-(cl-defun gk-ibuffer-generate-filter-groups-by-dir ()
+(defun gk-get-dir (buffer)
+  ;; The normal case works for buffers backed by files.
+  (if-let ((bufnam (buffer-file-name buffer)))
+      (file-name-directory (expand-file-name (file-truename bufnam)))
+    ;; But for buffers like Dired we need to do it like this.
+    (with-current-buffer buffer
+      (expand-file-name (file-truename default-directory)))))
+
+(defun gk-ibuffer-generate-filter-groups-by-dir ()
   "Create a set of ibuffer filter groups based on the dirs of buffers."
-  (let* ((func
-	  (lambda (buf)
-	    (when-let ((bufnam (buffer-file-name buf)))
-	      (file-name-directory (expand-file-name (file-truename bufnam))))))
-	 (dirs
-	  (ibuffer-remove-duplicates (delq nil (mapcar func (buffer-list))))))
+  (let ((dirs (ibuffer-remove-duplicates
+	       (delq nil (mapcar #'gk-get-dir (buffer-list))))))
     (mapcar (lambda (dir)
 	      (cons (concat "Directory: " (abbreviate-file-name dir))
 		    `((dir . ,dir))))
@@ -66,8 +70,8 @@
 (define-ibuffer-filter dir
     "Toggle current view to buffers with dir QUALIFIER."
   (:description "directory" :reader (read-from-minibuffer "Filter by dir: "))
-  (ibuffer-awhen (buffer-file-name buf)
-    (string= qualifier (file-name-directory it))))
+  (ibuffer-awhen (gk-get-dir buf)
+    (string= qualifier it)))
 
 (define-advice ibuffer-update (:before (&rest args) autogroups)
   "Group related buffers together using ‘ibuffer-vc’ and ‘dir’,
