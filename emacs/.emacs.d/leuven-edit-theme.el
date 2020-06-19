@@ -75,9 +75,10 @@ CONTROL can be a number, nil, or t.  When t, use DEFAULT-HEIGHT."
 ;;; Theme Faces.
 
 ;; Changes made from upstream:
-;; Backgrounds for default, org-default and fringe
-;; Revert to previous colours for cursor, region and paren-matched
-;; Revert to previous look for header-line
+;; • Backgrounds for default, org-default and fringe
+;; • Revert to previous colours for cursor, region and paren-matched
+;; • Revert to previous look for header-line
+;; • Colour and background for code-inline and markdown-pre-face
 
 (deftheme leuven-edit
   "Face colors with a light background.
@@ -91,7 +92,7 @@ more...")
       (cancel '(:slant italic :strike-through t :foreground "#A9A9A9"))
       (clock-line '(:box (:line-width 1 :color "#335EA8") :foreground "black" :background "#EEC900"))
       (code-block '(:foreground "#000088" :background "#FFFFE0"))
-      (code-inline '(:foreground "#006400" :background "#FDFFF7"))
+      (code-inline '(:foreground "#D0372D"))
       (column '(:height 1.0 :weight normal :slant normal :underline nil :strike-through nil :foreground "#E6AD4F" :background "#FFF2DE"))
       (completion-inline '(:weight normal :foreground "#C0C0C0" :inherit hl-line)) ; Like Google.
       (completion-other-candidates '(:weight bold :foreground "black" :background "#EBF4FE"))
@@ -709,7 +710,7 @@ more...")
    ;; `(markdown-metadata-key-face ((,class ())))
    ;; `(markdown-metadata-value-face ((,class ())))
    ;; `(markdown-missing-link-face ((,class ())))
-   `(markdown-pre-face ((,class (:inherit org-block-background))))
+   `(markdown-pre-face ((,class ,code-inline)))
    ;; `(markdown-reference-face ((,class ())))
    ;; `(markdown-strike-through-face ((,class ())))
    `(markdown-url-face ((,class ,link)))
