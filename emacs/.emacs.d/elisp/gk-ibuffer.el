@@ -40,7 +40,8 @@
   '(("Emacs"
      (name . "^\\*\\(scratch\\|Messages\\)\\*$"))
     ("VC"
-     (name . "^\\*\\(vc\\|log\\)-?"))
+     (or (name . "^\\*\\(vc\\|log\\)-?")
+	 (derived-mode . magit-mode)))
     ("Documentation"
      (name . "^\\*\\(Help\\|info\\|Man [0-9]?\\)"))
     ("Special buffers"
@@ -81,7 +82,10 @@ and special ones sepatarely."
 	(append
 	 gk-ibuffer-filters
 	 (ibuffer-vc-generate-filter-groups-by-vc-root)
-	 (gk-ibuffer-generate-filter-groups-by-dir))))
+	 (gk-ibuffer-generate-filter-groups-by-dir)))
+  ;; Force vc-refresh; might not be efficient
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf (vc-refresh-state))))
 
 ;; Hide these buffers by default.
 (defvar gk-ibuffer-collapsed-groups
@@ -101,7 +105,7 @@ and special ones sepatarely."
 	(push group ibuffer-hidden-filter-groups))))
   (ibuffer-redisplay t))
 
-(setq ibuffer-default-sorting-mode 'filename/process)
+(setq ibuffer-default-sorting-mode 'alphabetic)
 (add-hook 'ibuffer-hook 'gk-ibuffer-hide-hook)
 
 (provide 'gk-ibuffer)
