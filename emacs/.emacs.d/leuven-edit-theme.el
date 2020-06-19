@@ -77,6 +77,7 @@ CONTROL can be a number, nil, or t.  When t, use DEFAULT-HEIGHT."
 ;; Changes made from upstream:
 ;; Backgrounds for default, org-default and fringe
 ;; Revert to previous colours for cursor, region and paren-matched
+;; Revert to previous look for header-line
 
 (deftheme leuven-edit
   "Face colors with a light background.
@@ -214,7 +215,7 @@ more...")
    `(link ((,class ,link)))
    `(link-visited ((,class (:underline t :foreground "#E5786D"))))
    `(button ((,class (:underline t :foreground "#006DAF"))))
-   `(header-line ((,class (:box (:line-width 1 :color "black") :foreground "black" :background "#F0F0F0"))))
+   `(header-line ((,class (:background "#FFFF88" :weight bold :underline "black" :overline "black"))))
 
    ;; Gnus faces.
    `(gnus-button ((,class (:weight normal))))
