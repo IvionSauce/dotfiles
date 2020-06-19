@@ -79,6 +79,7 @@ CONTROL can be a number, nil, or t.  When t, use DEFAULT-HEIGHT."
 ;; • Revert to previous colours for cursor, region and paren-matched
 ;; • Revert to previous look for header-line
 ;; • Colour and background for code-inline and markdown-pre-face
+;; • Overhaul headings (markdown, org, etc) completely
 
 (deftheme leuven-edit
   "Face colors with a light background.
@@ -128,14 +129,14 @@ more...")
       (mail-unread-high '(:weight bold :foreground "#135985"))
       (marked-line '(:foreground "#AA0000" :background "#FFAAAA"))
       (match '(:weight bold :background "#FFFF00")) ; occur patterns + match in helm for files + match in Org files.
-      (ol1 `(,@(leuven-scale-font leuven-scale-outline-headlines 1.3) :weight bold :overline "#A7A7A7" :foreground "#3C3C3C" :background "#F0F0F0"))
-      (ol2 '(:height 1.0 :weight bold :overline "#123555" :foreground "#123555" :background "#E5F4FB"))
-      (ol3 '(:height 1.0 :weight bold :foreground "#005522" :background "#EFFFEF"))
-      (ol4 '(:height 1.0 :weight bold :slant normal :foreground "#EA6300"))
-      (ol5 '(:height 1.0 :weight bold :slant normal :foreground "#E3258D"))
-      (ol6 '(:height 1.0 :weight bold :slant italic :foreground "#0077CC"))
-      (ol7 '(:height 1.0 :weight bold :slant italic :foreground "#2EAE2C"))
-      (ol8 '(:height 1.0 :weight bold :slant italic :foreground "#FD8008"))
+      (ol1 `(:height 1.3 :weight bold))
+      (ol2 '(:height 1.3 :weight bold :underline t))
+      (ol3 '(:height 1.2 :weight bold))
+      (ol4 '(:height 1.1 :weight bold :underline t))
+      (ol5 '(:weight bold :slant italic))
+      (ol6 '(:slant italic :underline t))
+      (ol7 '(:foreground "#006699" :weight bold))
+      (ol8 '(:foreground "#006699" :underline "black"))
       (paren-matched '(:background "#99CCFF"))
       (paren-unmatched '(:weight bold :underline "red" :foreground "black" :background "#FFA5A5"))
       (region '(:background "#ABDFFA"))
