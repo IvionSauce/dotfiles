@@ -74,6 +74,9 @@ CONTROL can be a number, nil, or t.  When t, use DEFAULT-HEIGHT."
 
 ;;; Theme Faces.
 
+;; Changes made from upstream:
+;; Backgrounds for default, org-default and fringe
+
 (deftheme leuven-edit
   "Face colors with a light background.
 Basic, Font Lock, Isearch, Gnus, Message, Org mode, Diff, Ediff,
@@ -149,7 +152,7 @@ more...")
 
   (custom-theme-set-faces
    'leuven-edit
-   `(default ((,class (:foreground "#333333" :background "#FFFFFF"))))
+   `(default ((,class (:foreground "#333333" :background "#EEEEEC"))))
    `(bold ((,class (:weight bold :foreground "black"))))
    `(bold-italic ((,class (:weight bold :slant italic :foreground "black"))))
    `(italic ((,class (:slant italic :foreground "#1A1A1A"))))
@@ -160,7 +163,7 @@ more...")
    `(menu ((,class (:foreground "#FFFFFF" :background "#333333"))))
 
    ;; Highlighting faces.
-   `(fringe ((,class (:foreground "#4C9ED9" :background "white"))))
+   `(fringe ((,class (:foreground "#4C9ED9" :background "#EEEEEC"))))
    `(highlight ((,class ,highlight-blue)))
    `(region ((,class ,region)))
    `(secondary-selection ((,class ,match))) ; Used by Org-mode for highlighting matched entries and keywords.
@@ -757,7 +760,7 @@ more...")
    `(org-column ((,class ,column)))
    `(org-column-title ((,class ,column)))
    `(org-date ((,class (:underline t :foreground "#00459E"))))
-   `(org-default ((,class (:foreground "#333333" :background "#FFFFFF"))))
+   `(org-default ((,class (:foreground "#333333" :background "#EEEEEC"))))
    `(org-dim ((,class (:foreground "#AAAAAA"))))
    `(org-document-info ((,class (:foreground "#484848"))))
    `(org-document-info-keyword ((,class (:foreground "#008ED1" :background "#EAEAFF"))))
