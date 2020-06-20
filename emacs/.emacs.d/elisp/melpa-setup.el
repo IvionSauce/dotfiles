@@ -88,14 +88,16 @@
 
 (use-package avy
   :config
-  (setq avy-style 'post
-	avy-styles-alist '((avy-goto-line . at-full)))
   ;; Reduce visual clutter by setting avy-background and simplifying the colour
   ;; coding for matches
-  (set-face-attribute 'avy-lead-face nil :background nil :foreground "red")
-  (set-face-attribute 'avy-lead-face-0 nil :background nil :foreground "red")
   (setq avy-background t
 	avy-lead-faces '(avy-lead-face avy-lead-face avy-lead-face))
+  (set-face-attribute 'avy-background-face nil
+		      :background "unspecified" :foreground "gray40")
+  (set-face-attribute 'avy-lead-face nil
+		      :background "unspecified" :foreground "red"
+		      :weight 'normal)
+  (setq avy-all-windows nil)
   :bind
   (("M-g M-g" . avy-goto-char-2)
    ("M-g g" . avy-goto-line)
