@@ -50,6 +50,11 @@
 	  (:from-or-to . 22)
 	  (:subject . 256)))
 
+  ;; I prefer how it looks the old way, even if that's wrong.
+  ;; https://github.com/djcb/mu/issues/1500
+  (face-spec-set 'mu4e-header-highlight-face
+		 '((t :inherit region :weight bold :underline t)))
+
   ;; There is some discussion on what is meant by trashing a message,
   ;; see: https://github.com/djcb/mu/issues/1136
   ;; This is compounded by different server software having different attitudes
