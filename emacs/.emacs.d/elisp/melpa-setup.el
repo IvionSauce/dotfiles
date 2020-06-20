@@ -114,7 +114,16 @@
 	("C-'" . ace-jump-helm-line)))
 
 (use-package markdown-mode
+  :init
+  ;; To ensure we have access to whitespace-style
+  (require 'whitespace)
   :hook
-  (markdown-mode . visual-line-mode))
+  (markdown-mode . visual-line-mode)
+  ;; Use only spaces in markdown and don't trim trailing whitespace,
+  ;; it's sometimes significant.
+  (markdown-mode . (lambda ()
+		     (set (make-local-variable 'whitespace-style)
+			  (remq 'trailing whitespace-style))
+		     (setq indent-tabs-mode nil))))
 
 (provide 'melpa-setup)
