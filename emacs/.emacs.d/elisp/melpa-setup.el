@@ -16,7 +16,6 @@
 (setq use-package-always-ensure t)
 
 (use-package helm
-  :demand t
   :config
   (require 'helm-config)
   (setq helm-buffers-fuzzy-matching t
@@ -50,6 +49,7 @@
    ("C-c C-x" . helm-buffer-run-kill-buffers)))
 
 (use-package helm-swoop
+  :after helm
   :config
   (setq helm-swoop-speed-or-color t)
   :bind
@@ -106,6 +106,7 @@
 
 ;; Set up avy-jump in Helm
 (use-package ace-jump-helm-line
+  :after helm
   :config
   (setq ace-jump-helm-line-default-action 'select)
   :bind
