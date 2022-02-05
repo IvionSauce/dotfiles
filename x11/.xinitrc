@@ -1,9 +1,9 @@
 # Load various terminal emulator settings
 xrdb -merge ~/.Xresources
 
-# Set blanking to 20mins
+# Set blanking to 40mins
 xset s off
-xset dpms 0 0 1200
+xset dpms 0 2400 0
 
 # Load stored settings for NVidia cards
 nvidia-settings -l
@@ -20,4 +20,4 @@ xkbcomp -I$HOME/.xkb ~/.xkb/keymap/my-keymap $DISPLAY
 # Set previous wallpaper
 sh ~/.fehbg
 
-exec i3
+exec dbus-launch --exit-with-session i3
