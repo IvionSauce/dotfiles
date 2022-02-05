@@ -40,6 +40,7 @@ alias dvd="du -cB M"
 alias dvdr="growisofs -Z /dev/sr0 -r -J -D -l"
 alias hmp="mpv --audio-device=alsa/crossfeed"
 alias jine="LANG=ja_JP.utf8 wine"
+alias nless="LESSHISTFILE=/dev/null less"
 
 
 ## Widgets Loading ##
