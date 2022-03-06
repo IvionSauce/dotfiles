@@ -126,4 +126,6 @@
 			  (remq 'trailing whitespace-style))
 		     (setq indent-tabs-mode nil))))
 
+(use-package yaml-mode)
+
 (provide 'melpa-setup)
