@@ -20,6 +20,15 @@
  ;; No GNU Emacs welcome buffer
  inhibit-startup-message t)
 
+;; For Mac keyboards
+;; https://nickdrozd.github.io/2019/12/28/emacs-mac-mods.html
+(when (eq system-type 'darwin)
+  (setq
+   ns-command-modifier 'control
+   ns-option-modifier 'meta
+   ns-control-modifier 'super
+   ns-function-modifier 'hyper))
+
 ;; Optionally use commit-patch, https://porkrind.org/commit-patch/
 ;; Maybe not useful for those that exclusively use Magit
 (when (require 'commit-patch-buffer nil t)
