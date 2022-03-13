@@ -15,4 +15,5 @@
 (add-hook 'window-setup-hook 'ivi-themeing)
 (add-hook 'after-make-frame-functions 'ivi-themeing)
 
+(require 'ivi-font-scaling)
 (provide 'appearance)
